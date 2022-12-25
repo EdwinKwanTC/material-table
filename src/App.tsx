@@ -1,5 +1,6 @@
 import Table from './base/Table'
 import { TableHeaders } from './base/Table'
+import { Button, Box } from '@mui/material'
 
 type Data = {
     [key: string]: string | number
@@ -9,11 +10,18 @@ function App() {
     const headers: TableHeaders[] = [
         {
             key: 'name',
+            label: 'Name',
             inputType: 'text',
         },
         {
             key: 'age',
+            label: 'Age',
             inputType: 'number',
+        },
+        {
+            key: 'grade',
+            label: 'Grade',
+            inputType: 'text',
         },
     ]
 
@@ -21,10 +29,12 @@ function App() {
         {
             name: 'John',
             age: 20,
+            grade: 'A',
         },
         {
             name: 'Jane',
             age: 21,
+            grade: 'B',
         },
     ]
 
@@ -32,7 +42,21 @@ function App() {
         console.log(values)
     }
 
-    return <Table headers={headers} rows={data} handleSubmit={handleSubmit} />
+    const tableButton = () => {
+        return (
+            <Box sx={{ width: '100v%', p: 2 }}>
+                <Button size="small" variant="outlined" type="submit">
+                    Submit
+                </Button>
+            </Box>
+        )
+    }
+
+    return (
+        <Table headers={headers} rows={data} handleSubmit={handleSubmit}>
+            {tableButton()}
+        </Table>
+    )
 }
 
 export default App

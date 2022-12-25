@@ -9,9 +9,14 @@
         "preview": "vite preview"
     },
     "dependencies": {
+        "@emotion/react": "^11.10.5",
+        "@emotion/styled": "^11.10.5",
+        "@mui/material": "^5.11.1",
+        "add": "^2.0.6",
         "formik": "^2.2.9",
         "react": "^18.2.0",
-        "react-dom": "^18.2.0"
+        "react-dom": "^18.2.0",
+        "yarn": "^1.22.19"
     },
     "devDependencies": {
         "@types/react": "^18.0.26",
