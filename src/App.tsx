@@ -1,6 +1,7 @@
 import Table from './base/Table'
 import { TableHeaders } from './base/Table'
 import { Button, Box } from '@mui/material'
+import { schema } from './validatior/classValidator'
 
 type Data = {
     [key: string]: string | number
@@ -53,7 +54,12 @@ function App() {
     }
 
     return (
-        <Table headers={headers} rows={data} handleSubmit={handleSubmit}>
+        <Table
+            headers={headers}
+            rows={data}
+            handleSubmit={handleSubmit}
+            schema={schema}
+        >
             {tableButton()}
         </Table>
     )

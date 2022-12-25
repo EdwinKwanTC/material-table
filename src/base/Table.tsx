@@ -1,4 +1,4 @@
-import { Formik, Field, Form, ErrorMessage, FieldArray } from 'formik'
+import { Formik, Field, Form, ErrorMessage } from 'formik'
 import {
     Table as MuiTable,
     TableBody,
@@ -7,6 +7,7 @@ import {
     TableHead,
     TableRow,
     Paper,
+    Box,
 } from '@mui/material'
 
 interface TableProps {
@@ -14,6 +15,7 @@ interface TableProps {
     rows: Rows[]
     handleSubmit: (values: Rows[]) => void
     children?: React.ReactNode
+    schema?: any
 }
 
 interface Rows {
@@ -28,15 +30,16 @@ export interface TableHeaders {
 }
 
 export default function Table(props: TableProps) {
-    const { headers, rows, handleSubmit, children } = props
+    const { headers, rows, handleSubmit, children, schema } = props
+
     return (
         <TableContainer component={Paper}>
             <Formik
                 initialValues={rows}
                 onSubmit={(values) => handleSubmit(values)}
+                validationSchema={schema}
             >
-                {({ values }) => {
-                    console.log('values', values)
+                {({ values, errors, touched }) => {
                     return (
                         <Form>
                             <MuiTable>
@@ -86,6 +89,20 @@ export default function Table(props: TableProps) {
                                                                 type={
                                                                     header.inputType
                                                                 }
+                                                            />
+                                                            <ErrorMessage
+                                                                render={(
+                                                                    msg
+                                                                ) => (
+                                                                    <Box
+                                                                        sx={{
+                                                                            color: 'red',
+                                                                        }}
+                                                                    >
+                                                                        {msg}
+                                                                    </Box>
+                                                                )}
+                                                                name={`${index}.${header.key}`}
                                                             />
                                                         </TableCell>
                                                     )
