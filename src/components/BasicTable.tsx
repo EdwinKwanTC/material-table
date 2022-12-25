@@ -1,5 +1,5 @@
 const BasicTable = () => {
-  return <div></div>;
-};
+    return <div></div>
+}
 
-export default BasicTable;
+export default BasicTable
