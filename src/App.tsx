@@ -1,5 +1,12 @@
+import BasicTable from './components/BasicTable'
+
 function App() {
-    return <div></div>
+    return (
+        <div>
+            hello
+            <BasicTable />
+        </div>
+    )
 }
 
 export default App
