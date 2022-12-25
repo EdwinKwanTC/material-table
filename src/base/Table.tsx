@@ -1,6 +1,5 @@
 import { Formik, Field, Form, ErrorMessage, FieldArray } from 'formik'
 import {
-    Box,
     Table as MuiTable,
     TableBody,
     TableCell,
@@ -40,62 +39,62 @@ export default function Table(props: TableProps) {
                     console.log('values', values)
                     return (
                         <Form>
-                            {values.map((row, index) => (
-                                <Box key={index} sx={{ display: 'flex' }}>
-                                    <MuiTable>
-                                        {headers && (
-                                            <TableHead>
-                                                <TableRow>
-                                                    {headers.map(
-                                                        (
-                                                            header,
-                                                            headerIndex
-                                                        ) => (
-                                                            <TableCell
-                                                                key={
-                                                                    headerIndex
+                            <MuiTable>
+                                {headers && (
+                                    <TableHead>
+                                        <TableRow>
+                                            {headers.map(
+                                                (header, headerIndex) => (
+                                                    <TableCell
+                                                        key={headerIndex}
+                                                        align={
+                                                            header.align
+                                                                ? header.align
+                                                                : 'left'
+                                                        }
+                                                    >
+                                                        {header.label}
+                                                    </TableCell>
+                                                )
+                                            )}
+                                        </TableRow>
+                                    </TableHead>
+                                )}
+                                <TableBody></TableBody>
+                                <TableBody>
+                                    {values.map((row, index) => (
+                                        <TableRow key={`table-row.${index}`}>
+                                            {headers.map(
+                                                (header, headerIndex) => {
+                                                    return (
+                                                        <TableCell
+                                                            key={headerIndex}
+                                                        >
+                                                            <Field
+                                                                style={{
+                                                                    width: '100%',
+                                                                    minHeight:
+                                                                        '30px',
+                                                                    fontSize:
+                                                                        '14px',
+                                                                    border: '0px solid #ccc',
+                                                                }}
+                                                                name={`${index}.${header.key}`}
+                                                                placeholder={
+                                                                    header.key
                                                                 }
-                                                                align={
-                                                                    header.align
-                                                                        ? header.align
-                                                                        : 'left'
+                                                                type={
+                                                                    header.inputType
                                                                 }
-                                                            >
-                                                                {header.label}
-                                                            </TableCell>
-                                                        )
-                                                    )}
-                                                </TableRow>
-                                            </TableHead>
-                                        )}
-                                        <TableBody>
-                                            <TableRow>
-                                                {headers.map(
-                                                    (header, headerIndex) => {
-                                                        return (
-                                                            <TableCell
-                                                                key={
-                                                                    headerIndex
-                                                                }
-                                                            >
-                                                                <Field
-                                                                    name={`${index}.${header.key}`}
-                                                                    placeholder={
-                                                                        header.key
-                                                                    }
-                                                                    type={
-                                                                        header.inputType
-                                                                    }
-                                                                />
-                                                            </TableCell>
-                                                        )
-                                                    }
-                                                )}
-                                            </TableRow>
-                                        </TableBody>
-                                    </MuiTable>
-                                </Box>
-                            ))}
+                                                            />
+                                                        </TableCell>
+                                                    )
+                                                }
+                                            )}
+                                        </TableRow>
+                                    ))}
+                                </TableBody>
+                            </MuiTable>
                             {children}
                         </Form>
                     )
