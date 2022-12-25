@@ -63,7 +63,6 @@ export default function Table(props: TableProps) {
                                         </TableRow>
                                     </TableHead>
                                 )}
-                                <TableBody></TableBody>
                                 <TableBody>
                                     {values.map((row, index) => (
                                         <TableRow key={`table-row.${index}`}>
