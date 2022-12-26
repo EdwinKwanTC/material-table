@@ -10,14 +10,6 @@ import {
     Box,
 } from '@mui/material'
 
-type TableProps<T, U extends keyof T> = {
-    headers: TableHeaders[]
-    rows: Rows<T, U>[]
-    handleSubmit: (values: Rows<T, U>[]) => void
-    children?: React.ReactNode
-    schema?: any
-}
-
 type Rows<T, U extends keyof T> = {
     [key in U]: string | number
 }
@@ -27,6 +19,14 @@ export type TableHeaders = {
     label: string
     align?: 'left' | 'right' | 'center'
     inputType: 'text' | 'number'
+}
+
+type TableProps<T, U extends keyof T> = {
+    headers: TableHeaders[]
+    rows: Rows<T, U>[]
+    handleSubmit: (values: Rows<T, U>[]) => void
+    children?: React.ReactNode
+    schema?: any
 }
 
 export default function Table<T, U extends keyof T>(props: TableProps<T, U>) {
