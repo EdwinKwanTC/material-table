@@ -22,7 +22,7 @@ function App() {
         {
             key: 'grade',
             label: 'Grade',
-            inputType: 'text',
+            inputType: 'select',
         },
         {
             key: 'class',
@@ -35,22 +35,30 @@ function App() {
         {
             name: 'John',
             age: 20,
-            grade: 'A',
+            grade: 'a',
             class: '5D',
         },
         {
             name: 'Jane',
             age: 21,
-            grade: 'B',
+            grade: 'c',
         },
         {
             age: 22,
-            grade: 'C',
+            grade: 'c',
         },
     ]
 
     const handleSubmit = (values: Data[]) => {
         console.log(values)
+    }
+
+    const options = {
+        grade: [
+            { id: 1, name: 'a', value: 'A' },
+            { id: 2, name: 'b', value: 'B' },
+            { id: 3, name: 'c', value: 'C' },
+        ],
     }
 
     const tableButton = () => {
@@ -69,6 +77,7 @@ function App() {
             rows={data}
             handleSubmit={handleSubmit}
             schema={schema}
+            options={options}
         >
             {tableButton()}
         </Table>

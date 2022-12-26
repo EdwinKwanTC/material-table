@@ -34,11 +34,12 @@ type TableProps<T, U extends keyof T> = {
     handleSubmit: (values: Rows<T, U>[]) => void
     children?: React.ReactNode
     schema?: SchemaOf<Partial<Rows<T, U>>[]>
-    options?: { [key in U]: Options[] }
+    // options?: { [key in U]: Options[] }
+    options?: { [key: string]: Options[] }
 }
 
 export default function Table<T, U extends keyof T>(props: TableProps<T, U>) {
-    const { headers, rows, handleSubmit, children, schema } = props
+    const { headers, rows, handleSubmit, children, schema, options } = props
 
     const fullRowsKeysObject = rows.reduce(
         (r, c) => Object.assign(r, c),
@@ -117,7 +118,40 @@ export default function Table<T, U extends keyof T>(props: TableProps<T, U>) {
                                                                     }
                                                                 />
                                                             )}
-
+                                                            {header.inputType ===
+                                                                'select' && (
+                                                                <Field
+                                                                    as="select"
+                                                                    name={`${index}.${header.key}`}
+                                                                >
+                                                                    {options &&
+                                                                        console.log(
+                                                                            // @ts-ignore
+                                                                            options[
+                                                                                header
+                                                                                    .key
+                                                                            ].map(
+                                                                                (
+                                                                                    option,
+                                                                                    optionKey
+                                                                                ) => (
+                                                                                    <option value="a">
+                                                                                        A
+                                                                                    </option>
+                                                                                )
+                                                                            )
+                                                                        )}
+                                                                    <option value="a">
+                                                                        A
+                                                                    </option>
+                                                                    <option value="b">
+                                                                        B
+                                                                    </option>
+                                                                    <option value="c">
+                                                                        C
+                                                                    </option>
+                                                                </Field>
+                                                            )}
                                                             <ErrorMessage
                                                                 render={(
                                                                     msg
