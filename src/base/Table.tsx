@@ -41,10 +41,7 @@ type TableProps<T, U extends keyof T> = {
 export default function Table<T, U extends keyof T>(props: TableProps<T, U>) {
     const { headers, rows, handleSubmit, children, schema, options } = props
 
-    const fullRowsKeysObject = rows.reduce(
-        (r, c) => Object.assign(r, c),
-        {} as keyof T
-    )
+    const fullRowsKeysObject = rows.reduce((r, c) => Object.assign(r, c), {} as keyof T)
 
     const rowsWithMissingKeys = rows.map((row) => {
         const missingKeys = Object.keys(fullRowsKeysObject).filter(
@@ -70,106 +67,73 @@ export default function Table<T, U extends keyof T>(props: TableProps<T, U>) {
                                 {headers && (
                                     <TableHead>
                                         <TableRow>
-                                            {headers.map(
-                                                (header, headerIndex) => (
-                                                    <TableCell
-                                                        key={headerIndex}
-                                                        align={
-                                                            header.align
-                                                                ? header.align
-                                                                : 'left'
-                                                        }
-                                                    >
-                                                        {header.label}
-                                                    </TableCell>
-                                                )
-                                            )}
+                                            {headers.map((header, headerIndex) => (
+                                                <TableCell
+                                                    key={headerIndex}
+                                                    align={header.align ? header.align : 'left'}
+                                                >
+                                                    {header.label}
+                                                </TableCell>
+                                            ))}
                                         </TableRow>
                                     </TableHead>
                                 )}
                                 <TableBody>
                                     {values.map((row, index) => (
                                         <TableRow key={`table-row.${index}`}>
-                                            {headers.map(
-                                                (header, headerIndex) => {
-                                                    return (
-                                                        <TableCell
-                                                            key={headerIndex}
-                                                        >
-                                                            {(header.inputType ===
-                                                                'number' ||
-                                                                header.inputType ===
-                                                                    'text') && (
-                                                                <Field
-                                                                    style={{
-                                                                        width: '100%',
-                                                                        minHeight:
-                                                                            '30px',
-                                                                        fontSize:
-                                                                            '14px',
-                                                                        border: '0px solid #ccc',
-                                                                    }}
-                                                                    name={`${index}.${header.key}`}
-                                                                    placeholder={
-                                                                        header.key
-                                                                    }
-                                                                    type={
-                                                                        header.inputType
-                                                                    }
-                                                                />
-                                                            )}
-                                                            {header.inputType ===
-                                                                'select' && (
-                                                                <Field
-                                                                    as="select"
-                                                                    name={`${index}.${header.key}`}
-                                                                >
-                                                                    {options &&
-                                                                        console.log(
-                                                                            // @ts-ignore
-                                                                            options[
-                                                                                header
-                                                                                    .key
-                                                                            ].map(
-                                                                                (
-                                                                                    option,
-                                                                                    optionKey
-                                                                                ) => (
-                                                                                    <option value="a">
-                                                                                        A
-                                                                                    </option>
-                                                                                )
-                                                                            )
-                                                                        )}
-                                                                    <option value="a">
-                                                                        A
-                                                                    </option>
-                                                                    <option value="b">
-                                                                        B
-                                                                    </option>
-                                                                    <option value="c">
-                                                                        C
-                                                                    </option>
-                                                                </Field>
-                                                            )}
-                                                            <ErrorMessage
-                                                                render={(
-                                                                    msg
-                                                                ) => (
-                                                                    <Box
-                                                                        sx={{
-                                                                            color: 'red',
-                                                                        }}
-                                                                    >
-                                                                        {msg}
-                                                                    </Box>
-                                                                )}
+                                            {headers.map((header, headerIndex) => {
+                                                return (
+                                                    <TableCell key={headerIndex}>
+                                                        {(header.inputType === 'number' ||
+                                                            header.inputType === 'text') && (
+                                                            <Field
+                                                                style={{
+                                                                    width: '100%',
+                                                                    minHeight: '30px',
+                                                                    fontSize: '14px',
+                                                                    border: '0px solid #ccc',
+                                                                }}
                                                                 name={`${index}.${header.key}`}
+                                                                placeholder={header.key}
+                                                                type={header.inputType}
                                                             />
-                                                        </TableCell>
-                                                    )
-                                                }
-                                            )}
+                                                        )}
+                                                        {header.inputType === 'select' && (
+                                                            <Field
+                                                                as="select"
+                                                                name={`${index}.${header.key}`}
+                                                            >
+                                                                {options &&
+                                                                    console.log(
+                                                                        // @ts-ignore
+                                                                        options[header.key].map(
+                                                                            (option, optionKey) => (
+                                                                                <option value="a">
+                                                                                    A
+                                                                                </option>
+                                                                            )
+                                                                        )
+                                                                    )}
+                                                                <option value="a">A</option>
+                                                                <option value="b">B</option>
+                                                                <option value="c">C</option>
+                                                            </Field>
+                                                        )}
+                                                        <ErrorMessage
+                                                            render={(msg) => (
+                                                                <Box
+                                                                    sx={{
+                                                                        color: 'red',
+                                                                    }}
+                                                                >
+                                                                    {msg}
+                                                                </Box>
+                                                            )}
+                                                            name={`${index}.${header.key}`}
+                                                        />
+                                                    </TableCell>
+                                                )
+                                            })}
                                         </TableRow>
                                     ))}
                                 </TableBody>
