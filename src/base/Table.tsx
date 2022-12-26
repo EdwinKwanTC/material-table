@@ -32,10 +32,25 @@ export type TableHeaders = {
 export default function Table<T, U extends keyof T>(props: TableProps<T, U>) {
     const { headers, rows, handleSubmit, children, schema } = props
 
+    const fullRowsKeysObject = rows.reduce(
+        (r, c) => Object.assign(r, c),
+        {} as keyof T
+    )
+
+    const rowsWithMissingKeys = rows.map((row) => {
+        const missingKeys = Object.keys(fullRowsKeysObject).filter(
+            (key) => !Object.keys(row).includes(key)
+        )
+        return {
+            ...row,
+            ...missingKeys.reduce((r, c) => Object.assign(r, { [c]: '' }), {}),
+        }
+    })
+
     return (
         <TableContainer component={Paper}>
             <Formik
-                initialValues={rows}
+                initialValues={rowsWithMissingKeys}
                 onSubmit={(values) => handleSubmit(values)}
                 validationSchema={schema}
             >

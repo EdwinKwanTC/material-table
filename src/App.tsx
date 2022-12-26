@@ -24,6 +24,11 @@ function App() {
             label: 'Grade',
             inputType: 'text',
         },
+        {
+            key: 'class',
+            label: 'Class',
+            inputType: 'text',
+        },
     ]
 
     const data = [
@@ -31,6 +36,7 @@ function App() {
             name: 'John',
             age: 20,
             grade: 'A',
+            class: '5D',
         },
         {
             name: 'Jane',
@@ -38,7 +44,6 @@ function App() {
             grade: 'B',
         },
         {
-            name: 'Edwin',
             age: 22,
             grade: 'C',
         },
