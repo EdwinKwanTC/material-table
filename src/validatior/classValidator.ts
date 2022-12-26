@@ -10,5 +10,6 @@ export const schema = yup.array().of(
             .max(60, 'must be less than 60'),
         grade: yup.string().required(),
         class: yup.string(),
+        isGraduated: yup.boolean().required(),
     })
 )

@@ -12,7 +12,7 @@ import {
 import { SchemaOf } from 'yup'
 
 type Rows<T, U extends keyof T> = {
-    [key in U]: string | number
+    [key in U]: string | number | boolean
 }
 
 type Options = {
@@ -25,7 +25,7 @@ export type TableHeaders = {
     key: string
     label: string
     align?: 'left' | 'right' | 'center'
-    inputType: 'text' | 'number' | 'select'
+    inputType: 'text' | 'number' | 'select' | 'checkbox'
 }
 
 type TableProps<T, U extends keyof T> = {
@@ -85,12 +85,12 @@ export default function Table<T, U extends keyof T>(props: TableProps<T, U>) {
                                                 return (
                                                     <TableCell key={headerIndex}>
                                                         {(header.inputType === 'number' ||
-                                                            header.inputType === 'text') && (
+                                                            header.inputType === 'text' ||
+                                                            header.inputType === 'checkbox') && (
                                                             <Field
                                                                 style={{
-                                                                    width: '100%',
-                                                                    minHeight: '30px',
-                                                                    fontSize: '14px',
+                                                                    minHeight: '15px',
+                                                                    fontSize: '12px',
                                                                     border: '0px solid #ccc',
                                                                 }}
                                                                 name={`${index}.${header.key}`}
@@ -98,27 +98,26 @@ export default function Table<T, U extends keyof T>(props: TableProps<T, U>) {
                                                                 type={header.inputType}
                                                             />
                                                         )}
+
                                                         {header.inputType === 'select' && (
                                                             <Field
                                                                 as="select"
                                                                 name={`${index}.${header.key}`}
                                                             >
                                                                 {options &&
-                                                                    console.log(
-                                                                        // @ts-ignore
-                                                                        options[header.key].map(
-                                                                            (option, optionKey) => (
-                                                                                <option value="a">
-                                                                                    A
-                                                                                </option>
-                                                                            )
+                                                                    options[header.key].map(
+                                                                        (option, optionKey) => (
+                                                                            <option
+                                                                                key={optionKey}
+                                                                                value={option.value}
+                                                                            >
+                                                                                {option.name}
+                                                                            </option>
                                                                         )
                                                                     )}
-                                                                <option value="a">A</option>
-                                                                <option value="b">B</option>
-                                                                <option value="c">C</option>
                                                             </Field>
                                                         )}
+
                                                         <ErrorMessage
                                                             render={(msg) => (
                                                                 <Box

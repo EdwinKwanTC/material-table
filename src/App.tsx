@@ -4,7 +4,7 @@ import { Button, Box } from '@mui/material'
 import { schema } from './validatior/classValidator'
 
 type Data = {
-    [key: string]: string | number
+    [key: string]: string | number | boolean
 }
 
 function App() {
@@ -29,6 +29,11 @@ function App() {
             label: 'Class',
             inputType: 'text',
         },
+        {
+            key: 'isGraduated',
+            label: 'Graduated',
+            inputType: 'checkbox',
+        },
     ]
 
     const data = [
@@ -37,15 +42,19 @@ function App() {
             age: 20,
             grade: 'a',
             class: '5D',
+            isGraduated: true,
         },
         {
             name: 'Jane',
             age: 21,
             grade: 'c',
+            isGraduated: false,
         },
         {
+            name: 'Jack',
             age: 22,
             grade: 'c',
+            isGraduated: false,
         },
     ]
 
@@ -55,9 +64,9 @@ function App() {
 
     const options = {
         grade: [
-            { id: 1, name: 'a', value: 'A' },
-            { id: 2, name: 'b', value: 'B' },
-            { id: 3, name: 'c', value: 'C' },
+            { id: 1, name: 'A', value: 'a' },
+            { id: 2, name: 'B', value: 'b' },
+            { id: 3, name: 'C', value: 'c' },
         ],
     }
 
