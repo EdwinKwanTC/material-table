@@ -34,7 +34,6 @@ type TableProps<T, U extends keyof T> = {
     handleSubmit: (values: Rows<T, U>[]) => void
     children?: React.ReactNode
     schema?: SchemaOf<Partial<Rows<T, U>>[]>
-    // options?: { [key in U]: Options[] }
     options?: { [key: string]: Options[] }
 }
 
