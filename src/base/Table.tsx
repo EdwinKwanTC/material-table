@@ -10,26 +10,26 @@ import {
     Box,
 } from '@mui/material'
 
-interface TableProps {
+type TableProps<T, U extends keyof T> = {
     headers: TableHeaders[]
-    rows: Rows[]
-    handleSubmit: (values: Rows[]) => void
+    rows: Rows<T, U>[]
+    handleSubmit: (values: Rows<T, U>[]) => void
     children?: React.ReactNode
     schema?: any
 }
 
-interface Rows {
-    [key: string]: string | number
+type Rows<T, U extends keyof T> = {
+    [key in U]: string | number
 }
 
-export interface TableHeaders {
+export type TableHeaders = {
     key: string
     label: string
     align?: 'left' | 'right' | 'center'
     inputType: 'text' | 'number'
 }
 
-export default function Table(props: TableProps) {
+export default function Table<T, U extends keyof T>(props: TableProps<T, U>) {
     const { headers, rows, handleSubmit, children, schema } = props
 
     return (

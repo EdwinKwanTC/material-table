@@ -37,6 +37,11 @@ function App() {
             age: 21,
             grade: 'B',
         },
+        {
+            name: 'Edwin',
+            age: 22,
+            grade: 'C',
+        },
     ]
 
     const handleSubmit = (values: Data[]) => {
