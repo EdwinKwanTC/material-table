@@ -20,6 +20,11 @@ function App() {
             inputType: 'number',
         },
         {
+            key: 'sex',
+            label: 'Sex',
+            render: (row: Data) => <>{row.sex}</>,
+        },
+        {
             key: 'grade',
             label: 'Grade',
             inputType: 'select',
@@ -40,6 +45,7 @@ function App() {
         {
             name: 'John',
             age: 20,
+            sex: 'M',
             grade: 'a',
             class: '5D',
             isGraduated: true,
@@ -47,12 +53,14 @@ function App() {
         {
             name: 'Jane',
             age: 21,
+            sex: 'F',
             grade: 'c',
             isGraduated: false,
         },
         {
             name: 'Jack',
             age: 22,
+            sex: 'M',
             grade: 'c',
             isGraduated: false,
         },
@@ -72,7 +80,7 @@ function App() {
 
     const tableButton = () => {
         return (
-            <Box sx={{ width: '100v%', p: 2 }}>
+            <Box sx={{ width: '100v%', p: 2, textAlign: 'right' }}>
                 <Button size="small" variant="outlined" type="submit">
                     Submit
                 </Button>

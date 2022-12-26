@@ -11,5 +11,6 @@ export const schema = yup.array().of(
         grade: yup.string().required(),
         class: yup.string(),
         isGraduated: yup.boolean().required(),
+        sex: yup.string(),
     })
 )
