@@ -9,6 +9,7 @@ import {
     Paper,
     Box,
 } from '@mui/material'
+import { SchemaOf } from 'yup'
 
 type Rows<T, U extends keyof T> = {
     [key in U]: string | number
@@ -18,7 +19,7 @@ export type TableHeaders = {
     key: string
     label: string
     align?: 'left' | 'right' | 'center'
-    inputType: 'text' | 'number'
+    inputType: 'text' | 'number' | 'select'
 }
 
 type TableProps<T, U extends keyof T> = {
@@ -26,7 +27,8 @@ type TableProps<T, U extends keyof T> = {
     rows: Rows<T, U>[]
     handleSubmit: (values: Rows<T, U>[]) => void
     children?: React.ReactNode
-    schema?: any
+    schema?: SchemaOf<Partial<Rows<T, U>>[]>
+    options?: any
 }
 
 export default function Table<T, U extends keyof T>(props: TableProps<T, U>) {
@@ -87,23 +89,29 @@ export default function Table<T, U extends keyof T>(props: TableProps<T, U>) {
                                                         <TableCell
                                                             key={headerIndex}
                                                         >
-                                                            <Field
-                                                                style={{
-                                                                    width: '100%',
-                                                                    minHeight:
-                                                                        '30px',
-                                                                    fontSize:
-                                                                        '14px',
-                                                                    border: '0px solid #ccc',
-                                                                }}
-                                                                name={`${index}.${header.key}`}
-                                                                placeholder={
-                                                                    header.key
-                                                                }
-                                                                type={
-                                                                    header.inputType
-                                                                }
-                                                            />
+                                                            {(header.inputType ===
+                                                                'number' ||
+                                                                header.inputType ===
+                                                                    'text') && (
+                                                                <Field
+                                                                    style={{
+                                                                        width: '100%',
+                                                                        minHeight:
+                                                                            '30px',
+                                                                        fontSize:
+                                                                            '14px',
+                                                                        border: '0px solid #ccc',
+                                                                    }}
+                                                                    name={`${index}.${header.key}`}
+                                                                    placeholder={
+                                                                        header.key
+                                                                    }
+                                                                    type={
+                                                                        header.inputType
+                                                                    }
+                                                                />
+                                                            )}
+
                                                             <ErrorMessage
                                                                 render={(
                                                                     msg

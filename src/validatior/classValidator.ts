@@ -9,5 +9,6 @@ export const schema = yup.array().of(
             .min(18, 'must be greater than 80')
             .max(60, 'must be less than 60'),
         grade: yup.string().required(),
+        class: yup.string(),
     })
 )
